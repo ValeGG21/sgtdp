@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/estacion04.css">
+    <title>EMPAQUE</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul> 
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Registro de Empaque</h1>
+        <form action="/proceso4" method="POST">
+    
+            <label for="producto_elaborado">Producto Elaborado:</label>
+            <select id="producto_elaborado" name="producto_elaborado" required>
+                <option value="">Seleccione un producto</option>
+                <option value="CHORIZO">CHORIZO</option>
+                <option value="JAMON">JAMÓN</option>
+                <option value="TOCINETA">TOCINETA</option>
+                <option value="MORCILLA">MORCILLA</option>
+                <option value="SALCHICHON">SALCHICHÓN</option>
+            </select>
+            
+            <label for="fecha_empaque">Fecha de Empaque:</label>
+            <input type="datetime-local" id="fecha_empaque" name="fecha_empaque" required>
+            
+            <label for="temp_antes_tajar">Temperatura antes de tajar (°C):</label>
+            <input type="number" step="0.01" id="temp_antes_tajar" name="temp_antes_tajar" class="temperatura-input" data-max="6" required>
+            
+            <label for="temp_antes_empacar">Temperatura antes de empacar (°C):</label>
+            <input type="number" step="0.01" id="temp_antes_empacar" name="temp_antes_empacar" class="temperatura-input" data-max="6" required>
+            
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+            
+            <button type="submit">FINALIZAR</button>
+        </form>
+    </main>
+       <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Script cargado correctamente."); // Para depuración
+
+        const inputs = document.querySelectorAll('.temperatura-input');
+        
+        if (inputs.length === 0) {
+            console.error("No se encontraron inputs con la clase .temperatura-input");
+            return;
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                validarTemperatura(this);
+            });
+
+            if (input.value) {
+                validarTemperatura(input);
+            }
+        });
+    });
+
+    function validarTemperatura(input) {
+        const valor = parseFloat(input.value);
+        const maxTemp = parseFloat(input.dataset.max);
+
+        if (!isNaN(valor) && valor > maxTemp) {
+            input.classList.add('temperatura-excedida');
+
+            let warningSpan = input.parentElement.querySelector('.warning-text');
+            if (!warningSpan) {
+                warningSpan = document.createElement('span');
+                warningSpan.className = 'warning-text';
+                warningSpan.style.color = '#ff0000';
+                warningSpan.style.fontSize = '0.8em';
+                warningSpan.textContent = `⚠️ Valor excede ${maxTemp}°C - Se marcará en observaciones`;
+                input.parentElement.appendChild(warningSpan);
+            }
+        } else {
+            input.classList.remove('temperatura-excedida');
+
+            const warningSpan = input.parentElement.querySelector('.warning-text');
+            if (warningSpan) {
+                warningSpan.remove();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

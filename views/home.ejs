@@ -1,0 +1,83 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/icon.png" type="image/x-icon">
+        <link rel="stylesheet" href="/styles/home.css">
+        <title>HOME</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <img src="/images/CRD.png" alt="Logo">
+                <ul> 
+                    <li><a href="/proceso_list">Procesos</a></li>
+                    <li><a href="/usuario">Usuarios</a></li>
+                    <li><a href="/informe">Informes</a></li>
+                    <li><a href="/logout">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="search-container">
+            <form action="/buscar" method="GET">
+                <input type="search" 
+                    name="buscar" 
+                    placeholder="Buscar producto"
+                    value="<%= locals.busqueda ? busqueda : '' %>">
+                <button type="submit">
+                    <img src="/images/buscar.png" alt="Buscar">
+                </button>
+            </form>
+        </section>
+
+        <section class="contenedor-tabla">
+            <div class="header-container">
+                <h2>PROCESOS VIGENTES</h2>
+                <% if (locals.busqueda) { %>
+                    <a href="/home" class="clear-search">Mostrar todos</a>
+                <% } %>
+            </div>
+
+            <% if (locals.error) { %>
+                <div class="error-message">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>PRODUCTO</th>
+                        <th>FECHA</th>
+                        <th>LOTE</th>
+                        <th>VENCE</th>
+                        <th>ESTADO DE LA CARNE</th>
+                        <th>PROCEDENCIA</th>
+                        <th>ESTACION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (procesos && procesos.length > 0) { %>
+                        <% procesos.forEach(registro => { %>
+                            <tr>
+                                <td><%= registro.producto %></td>
+                                <td><%= registro.fecha %></td>
+                                <td><%= registro.lote %></td>
+                                <td><%= registro.vence %></td>
+                                <td><%= registro.estado %></td>
+                                <td><%= registro.procedencia %></td>
+                                <td><%= registro.estacion %></td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="8" class="no-records">🚨 No hay procesos vigentes</td>
+                        </tr>
+                    <% } %>
+                </tbody>                
+            </table>
+        </section>
+    </body>
+    </html>

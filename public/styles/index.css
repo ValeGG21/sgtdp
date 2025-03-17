@@ -1,0 +1,94 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff6f00, #f5be50); /* Naranja degradado */  
+    color: #333;
+    width: 100%;
+    height: 100vh;
+    font-size: 13pt;
+  }
+  
+  h2 {
+    color: #28a745; /* Verde */
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor principal */
+  .contenedor {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 0 15px #ffa200, 0 0 30px #ffcc00; /* Naranja brillante */
+    text-align: center;
+    width: 400px;
+    height: 500px;
+    border: 2px solid #28a745; /* Verde */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Efecto al pasar el mouse */
+  .contenedor:hover {
+    box-shadow: 0 0 20px #28a745, 0 0 40px #32cd32; /* Verde brillante */
+    border-color: #ffc34d; /* Naranja claro */
+  }
+  
+  /* Imagen */
+  .contenedor img {
+    width: 200px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+  
+  /* Formularios */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  label {
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333; /* Neutro para texto */
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ffc34d; /* Naranja */
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-size: 13pt;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #28a745; /* Verde */
+  }
+  
+  input[type="submit"] {
+    background: #28a745; /* Verde */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    top: 20px;
+  }
+  
+  input[type="submit"]:hover {
+    background: #32cd32; /* Verde más claro */
+  }
+  

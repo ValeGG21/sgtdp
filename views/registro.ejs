@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/registro.css">
+    <title>REGISTRO</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul>
+                <li><a href="/usuario">Regresar</a></li>
+                <li><a href="/informe">Informes</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="contenedor-formulario">
+        <h2>Registro de Usuario</h2>
+        <form action="/registrar" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" placeholder="Ingrese su número de cédula" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="estacion">Número de estación:</label>
+                <input type="number" id="estacion" name="estacion" placeholder="Ingrese el número de estación" required>
+            </div>
+    
+            <input type="submit" value="Registrar">
+        </form>
+    </section>
+</body>
+</html>

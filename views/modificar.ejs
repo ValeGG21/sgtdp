@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/modificar.css">
+    <title>MODIFICAR REGISTRO</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul>
+                <li><a href="/usuario">Regresar</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contenedor-formulario">
+        <h2>Modificar Registro</h2>
+
+        <form id="formModificar" action="/actualizar" method="POST">
+            <input type="hidden" name="id" id="id" value="<%= usuario.id %>" />
+    
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<%= usuario.nombre %>" required />
+            </div>
+    
+            <div class="form-group">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" value="<%= usuario.cedula %>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="numero_estacion">Número de Estación:</label>
+                <input type="number" id="numero_estacion" name="numero_estacion" value="<%= usuario.estacion %>" required />
+            </div>
+    
+            <div class="form-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" value="<%= usuario.usuario %>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select id="rol" name="rol">
+                    <option value="true" <%= usuario.rol === 'Administrador' ? 'selected' : '' %>>ADMINISTRADOR</option>
+                    <option value="false" <%= usuario.rol === 'Usuario' ? 'selected' : '' %>>USUARIO</option>
+                </select>
+            </div>      
+    
+            <div class="form-group">
+                <label for="activo">Activo:</label>
+                <select id="activo" name="activo">
+                    <option value="true" <%= usuario.activo ? 'selected' : '' %>>Sí</option>
+                    <option value="false" <%= !usuario.activo ? 'selected' : '' %>>No</option>
+                </select>
+            </div>
+    
+            <div class="form-buttons">
+                <button type="submit" class="btn modificar">Guardar Cambios</button>
+                <button type="button" class="btn cancelar" onclick="window.history.back()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/estacion03.css">
+    <title>CAVAS</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul> 
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Formulario de Temperaturas de Cavas y Áreas</h1>
+        <form action="/proceso3" method="POST" enctype="multipart/form-data">
+            <div class="form-grid">
+                <!-- Columna Izquierda -->
+                <div class="input-group">
+                    <label for="producto_elaborado">Producto Elaborado:</label>
+                    <select id="producto_elaborado" name="producto_elaborado" required>
+                        <option value="">Seleccione un producto</option>
+                        <option value="CHORIZO">CHORIZO</option>
+                        <option value="JAMON">JAMÓN</option>
+                        <option value="TOCINETA">TOCINETA</option>
+                        <option value="MORCILLA">MORCILLA</option>
+                        <option value="SALCHICHON">SALCHICHÓN</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="cava_6_max">Temperatura Máxima Cava 6:</label>
+                    <input type="number" step="0.01" id="cava_6_max" name="cava_6_max">
+                </div>
+
+                <div class="input-group">
+                    <label for="cava_choque">Temperatura Máxima Cava Choque:</label>
+                    <input type="number" step="0.01" id="cava_choque" name="cava_choque">
+                </div>
+
+                <div class="input-group">
+                    <label for="cava_7_max">Temperatura Máxima Cava 7:</label>
+                    <input type="number" step="0.01" id="cava_7_max" name="cava_7_max">
+                </div>
+
+                <div class="input-group">
+                    <label for="area_coccion_temp_max">Temperatura Máxima Área Cocción:</label>
+                    <input type="number" step="0.01" id="area_coccion_temp_max" name="area_coccion_temp_max">
+                </div>
+
+                <div class="input-group">
+                    <label for="area_empaque_temp_max">Temperatura Máxima Área Empaque:</label>
+                    <input type="number" step="0.01" id="area_empaque_temp_max" name="area_empaque_temp_max">
+                </div>
+
+                <div class="input-group">
+                    <label for="area_produccion_temp_max">Temperatura Máxima Área Producción:</label>
+                    <input type="number" step="0.01" id="area_produccion_temp_max" name="area_produccion_temp_max">
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea name="observaciones" id="observaciones" rows="4" maxlength="5000"></textarea>
+                </div>
+
+                <div class="file-controls">
+                    <div class="file-upload">
+                        <button type="button" onclick="document.getElementById('evidencia').click();">Seleccionar Archivo</button>
+                        <span id="file-name">No se ha seleccionado ningún archivo</span>
+                    </div>
+                    <input type="file" id="evidencia" name="evidencia" accept="image/*" style="display: none;" onchange="updateFileName();">
+                </div>
+                
+                <div class="submit-container">
+                    <button type="submit">FINALIZAR</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <script>
+        function updateFileName() {
+            var fileInput = document.getElementById('evidencia');
+            var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No se ha seleccionado ningún archivo';
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/informe.css">
+    <title>INFORME</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png">
+            <ul>
+                <li><a href="/usuario">Usuarios</a></li>
+                <li><a href="/home">Procesos</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="search-container">
+        <form action="/buscarInforme" method="GET">
+            <input type="search" name="buscar" placeholder="Buscar informe">
+            <button type="submit">
+                <img src="/images/buscar.png" alt="Buscar">
+            </button>
+        </form>
+    </section>
+    <section class="contenedor-tabla">
+        <h2>Informes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>FECHA</th>
+                    <th>LOTE</th>
+                    <th>DESCARGAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (informes && informes.length > 0) { %>
+                    <% informes.forEach(informe => { %>
+                        <tr>
+                            <td><%= informe.nombre %></td>
+                            <td><%= new Date(informe.fecha).toLocaleDateString() %></td>
+                            <td><%= informe.lote %></td>
+                            <td>
+                                <a href="/descargar/<%= informe.archivo %>" 
+                                    onclick="descargarYRedirigir(event, '/informe')" 
+                                    class="descargar-btn">Descargar</a>
+                                 
+                                 <script>
+                                     function descargarYRedirigir(event, redireccionUrl) {
+                                         // Evita que el enlace haga su comportamiento predeterminado
+                                         event.preventDefault();
+                                 
+                                         // Realiza la descarga
+                                         const enlace = event.currentTarget.href; // Obtén la URL del archivo
+                                         const link = document.createElement('a'); // Crea un enlace temporal
+                                         link.href = enlace; // Asigna la URL del archivo al enlace temporal
+                                         link.download = ''; // Establece que será una descarga
+                                         link.click(); // Dispara la descarga
+                                 
+                                         // Redirige después de un retraso
+                                         setTimeout(() => {
+                                             window.location.href = redireccionUrl; // Redirige a la URL deseada
+                                         }, 1000); // Ajusta el tiempo según sea necesario
+                                     }
+                                 </script>
+                                 
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No se encontraron informes.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </section>
+    
+</body>
+</html>

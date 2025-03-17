@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/usuario.css">
+    <title>USUARIOS</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul>
+                <li><a href="/home">Regresar</a></li>
+                <li><a href="/registro">Agregar usuario</a></li>
+                <li><a href="/informe">Informes</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="search-container">
+        <form action="/buscarUser" method="GET">
+            <input type="search" name="buscar" placeholder="Buscar Usuario">
+            <button type="submit">
+                <img src="/images/buscar.png" alt="Buscar">
+            </button>
+        </form>
+    </section>
+
+    <section class="contenedor-tabla">
+        <h2>USUARIOS</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>NOMBRE COMPLETO</th>
+                    <th>CEDULA</th>
+                    <th>NUMERO DE ESTACION</th>
+                    <th>USUARIO</th>
+                    <th>ROL</th> <!-- Nueva columna para mostrar el rol -->
+                    <th>ACTIVO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% usuarios.forEach(usuario => { %>  <!-- Itera sobre cada usuario -->
+                    <tr>
+                        <td><%= usuario.nombre %></td> <!-- Muestra el nombre -->
+                        <td><%= usuario.cedula %></td> <!-- Muestra la cédula -->
+                        <td><%= usuario.estacion %></td> <!-- Muestra el número de estación -->
+                        <td><%= usuario.usuario %></td> <!-- Muestra el nombre de usuario -->
+                        <td><%= usuario.rol === 'Administrador' ? 'ADMINISTRADOR' : 'USUARIO' %></td>
+                        <td><%= usuario.activo ? 'Sí' : 'No' %></td> <!-- Muestra si el usuario está activo -->
+                        <td>
+                            <button class="modificar-btn">
+                                <a href="/modificar/<%= usuario.id %>">Modificar</a>
+                            </button>
+                            <button 
+                                class="btn <%= usuario.activo ? 'desactivar-btn' : 'activar-btn' %>" 
+                                onclick="abrirModal('<%= usuario.nombre %>', '<%= usuario.cedula %>', '<%= usuario.activo %>')">
+                                <%= usuario.activo ? 'Desactivar' : 'Activar' %>
+                            </button>
+                        </td>
+                    </tr>
+                <% }) %>  <!-- Fin del foreach -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3>¿Deseas cambiar el estado de este usuario?</h3>
+            <p id="usuarioInfo"></p>
+            <form action="/cambiar-estado" method="POST">
+                <input type="hidden" name="cedula" id="cedula">
+                <div class="modal-buttons">
+                    <button type="submit" class="confirm">CONFIRMAR</button>
+                    <button type="button" class="cancel" onclick="cerrarModal()">CANCELAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal(nombre, cedula, activo) {
+        const accion = activo ? 'desactivar' : 'activar';
+        document.getElementById('cedula').value = cedula;
+        document.getElementById('modal').classList.add('active');
+}
+
+
+        function cerrarModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

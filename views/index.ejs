@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INICIO DE SESIÓN</title>
+  <!-- Enlace a estilos e ícono -->
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="icon" href="/images/icon.png" type="image/x-icon">
+</head>
+<body>
+  <section class="contenedor">
+    <img src="/images/CRD.png" alt="Logo de la empresa" class="logo">
+    <form action="/validacion" method="post">
+      <h2 class="titulo">Inicia sesión</h2>
+
+      <label for="estacion" class="etiqueta">Número de estación</label>
+      <input type="text" id="estacion" name="estacion" class="campo" required>
+
+      <label for="usuario" class="etiqueta">Usuario</label>
+      <input type="text" id="usuario" name="usuario" class="campo" required>
+
+      <label for="contraseña" class="etiqueta">Contraseña</label>
+      <input type="password" id="contraseña" name="contraseña" class="campo"  required>
+
+      <input type="submit" value="ACCEDER" class="boton">
+    </form>
+  </section>
+</body>
+</html>

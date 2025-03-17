@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/estacion01.css">
+    <title>PRODUCCIÓN</title>
+    <style>
+        /* Estilos adicionales para la reorganización */
+        .form-actions-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+        
+        .observaciones-container {
+            grid-column: 1;
+        }
+        
+        .buttons-container {
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-top: 0;
+        }
+        
+        .form-group.observaciones-full {
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        .form-group.observaciones-full textarea {
+            height: 100%;
+            min-height: 100px;
+        }
+        
+        /* Ajustes responsive */
+        @media (max-width: 700px) {
+            .form-actions-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .observaciones-container,
+            .buttons-container {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul> 
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="contenedor-formulario">
+        <h2>Registro de Temperaturas en Producción</h2>
+        <form action="/proceso1" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="lote">Lote</label>
+                <input type="number" step="0.01" id="lote" name="lote" class="temperatura-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Vence">Vence</label>
+                <input type="number" step="0.01" id="Vence" name="Vence" class="temperatura-input" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="producto_elaborado">Producto Elaborado:</label>
+                <select id="producto_elaborado" name="producto_elaborado" required>
+                    <option value="">Seleccione un producto</option>
+                    <option value="CHORIZO">CHORIZO</option>
+                    <option value="JAMON">JAMÓN</option>
+                    <option value="TOCINETA">TOCINETA</option>
+                    <option value="MORCILLA">MORCILLA</option>
+                    <option value="SALCHICHON">SALCHICHÓN</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="pulpa_cerdo_temp_max">Pulpa de Cerdo (°C):</label>
+                <input type="number" step="0.01" id="pulpa_cerdo_temp_max" name="pulpa_cerdo_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pulpa_res_temp_max">Pulpa de Res (°C):</label>
+                <input type="number" step="0.01" id="pulpa_res_temp_max" name="pulpa_res_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tocino_temp_max">Tocino (°C):</label>
+                <input type="number" step="0.01" id="tocino_temp_max" name="tocino_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pasta_temp_max">Pasta (°C):</label>
+                <input type="number" step="0.01" id="pasta_temp_max" name="pasta_temp_max" class="temperatura-input" data-max="2" required>
+            </div>
+
+            <div class="form-group">
+                <label for="emulsion_temp_max">Emulsión (°C):</label>
+                <input type="number" step="0.01" id="emulsion_temp_max" name="emulsion_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="repele_res_temp_max">Repele de Res (°C):</label>
+                <input type="number" step="0.01" id="repele_res_temp_max" name="repele_res_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="repele_cerdo_temp_max">Repele de Cerdo (°C):</label>
+                <input type="number" step="0.01" id="repele_cerdo_temp_max" name="repele_cerdo_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mezcla_temp_max">Mezcla (°C):</label>
+                <input type="number" step="0.01" id="mezcla_temp_max" name="mezcla_temp_max" class="temperatura-input" data-max="6" required>
+            </div>
+
+            <!-- Contenedor de acciones reorganizado -->
+            <div class="form-actions-container">
+                <div class="observaciones-container">
+                    <div class="form-group observaciones-full">
+                        <label for="observaciones">Observaciones:</label>
+                        <textarea id="observaciones" name="observaciones"></textarea>
+                    </div>
+                </div>
+                
+                <div class="buttons-container">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="evidencia" name="evidencia" accept="image/*">
+                        <label for="evidencia" class="file-label">Seleccionar Archivo</label>
+                        <span class="file-name">No se ha seleccionado ningún archivo</span>
+                    </div>
+                    <button type="submit" class="btn-estacion1">Finalizar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.temperatura-input');
+            const form = document.querySelector('form');
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    validarTemperatura(this);
+                });
+                
+                if (input.value) {
+                    validarTemperatura(input);
+                }
+            });
+
+            const fileInput = document.getElementById('evidencia');
+            const fileName = document.querySelector('.file-name');
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    fileName.textContent = this.files[0].name;
+                } else {
+                    fileName.textContent = 'No se ha seleccionado ningún archivo';
+                }
+            });
+        });
+
+        function validarTemperatura(input) {
+            const valor = parseFloat(input.value);
+            const maxTemp = parseFloat(input.dataset.max);
+            
+            if (!isNaN(valor) && valor > maxTemp) {
+                input.classList.add('temperatura-excedida');
+                const warningSpan = input.parentElement.querySelector('.warning-text');
+                if (!warningSpan) {
+                    const span = document.createElement('span');
+                    span.className = 'warning-text';
+                    span.style.color = '#ff0000';
+                    span.style.fontSize = '0.8em';
+                    span.textContent = `Valor excede ${maxTemp}°C - Se marcará en observaciones`;
+                    input.parentElement.appendChild(span);
+                }
+            } else {
+                input.classList.remove('temperatura-excedida');
+                const warningSpan = input.parentElement.querySelector('.warning-text');
+                if (warningSpan) {
+                    warningSpan.remove();
+                }
+            }
+        }
+        console.log('Inputs loaded');
+console.log('Form loaded');
+console.log('File input loaded');
+console.log('File name loaded');
+
+inputs.forEach(input => {
+    console.log(`Input ${input.id} loaded`);
+    input.addEventListener('input', function() {
+        console.log(`Input ${input.id} changed`);
+        validarTemperatura(this);
+    });
+    
+    if (input.value) {
+        console.log(`Input ${input.id} has initial value`);
+        validarTemperatura(input);
+    }
+});
+
+fileInput.addEventListener('change', function() {
+    console.log('File input changed');
+    if (this.files && this.files[0]) {
+        console.log(`File ${this.files[0].name} selected`);
+        fileName.textContent = this.files[0].name;
+    } else {
+        console.log('No file selected');
+        fileName.textContent = 'No se ha seleccionado ningún archivo';
+    }
+});
+
+function validarTemperatura(input) {
+    console.log(`Validating input ${input.id}`);
+    const valor = parseFloat(input.value);
+    const maxTemp = parseFloat(input.dataset.max);
+    
+    if (!isNaN(valor) && valor > maxTemp) {
+        console.log(`Input ${input.id} exceeded maximum temperature`);
+        input.classList.add('temperatura-excedida');
+        const warningSpan = input.parentElement.querySelector('.warning-text');
+        if (!warningSpan) {
+            console.log(`Adding warning text to input ${input.id}`);
+            const span = document.createElement('span');
+            span.className = 'warning-text';
+            span.style.color = '#ff0000';
+            span.style.fontSize = '0.8em';
+            span.textContent = `Valor excede ${maxTemp}°C - Se marcará en observaciones`;
+            input.parentElement.appendChild(span);
+        }
+    } else {
+        console.log(`Input ${input.id} is within valid range`);
+        input.classList.remove('temperatura-excedida');
+        const warningSpan = input.parentElement.querySelector('.warning-text');
+        if (warningSpan) {
+            console.log(`Removing warning text from input ${input.id}`);
+            warningSpan.remove();
+        }
+    }
+}
+    </script>
+</body>
+</html>

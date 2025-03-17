@@ -1,0 +1,198 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff6f00, #f5be50);
+    color: #333; 
+    width: 100%;
+    height: 100vh;
+}
+
+/* Estilo del header */
+header {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+/* Estilo del nav */
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+header nav img {
+    width: 150px;
+    height: 50px;
+}
+
+/* Lista del menú */
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+header nav ul li:hover {
+    color: black;
+    background-color: #0dff0041;
+    border-radius: 5px;
+    
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+    display: flex;
+    align-items: center; /* Alinea el botón con el input */
+    justify-content: flex-start; /* Alinea el buscador a la izquierda */
+    margin: 30px 20px; /* Ajusta el margen para mejor separación */
+}
+
+/* Input de búsqueda */
+.search-container input[type="search"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ffa200;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Input en foco */
+.search-container input[type="search"]:focus {
+    border-color: #ffffff;
+}
+
+/* Botón de búsqueda */
+.search-container button {
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.9s ease;
+}
+
+/* Imagen del botón */
+.search-container button img {
+    width: 30px;
+    height: auto;
+    position: relative;
+    left: 285px;
+    bottom: 45px;
+}
+
+/* Contenedor de la tabla */
+.contenedor-tabla {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Alinea todo verticalmente */
+}
+
+/* Estilos para el h2 */
+.contenedor-tabla h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    right: 615px;
+    bottom: 50px;
+}
+
+/* Estilo de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 55px;
+}
+
+/* Estilo de las celdas de la tabla */
+table th,
+table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Estilo de las celdas del encabezado */
+table th {
+    background-color: rgb(43, 200, 43);
+    color: white;
+}
+
+/* Estilo de las filas de la tabla al pasar el mouse */
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Media queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    /* Header */
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    header nav img {
+        margin-bottom: 10px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Contenedor de búsqueda */
+    .search-container {
+        justify-content: center; /* Centra el buscador en dispositivos pequeños */
+        margin: 20px;
+    }
+
+    .search-container input[type="search"] {
+        width: 200px;
+    }
+
+    /* Estilos de la tabla */
+    table {
+        width: 90%;
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

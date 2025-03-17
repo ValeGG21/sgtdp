@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/procesoList.css">
+    <title>LISTADO DE PROCESOS</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul>
+                <li><a href="/home">Regresar</a></li>
+                <li><a href="/proceso">Agregar Proceso</a></li>
+                <li><a href="/logout" id="logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="search-container">
+        <form action="/buscarProceso" method="GET">
+            <input type="search" name="buscar" placeholder="Buscar Proceso">
+            <button type="submit">
+                <img src="/images/buscar.png" alt="Buscar">
+            </button>
+        </form>
+    </section>
+
+    <div class="contenedor-listado">
+        <h2>Listado de Procesos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Proceso</th>
+                    <th>Estación Encargada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (procesos.length > 0) { %>
+                    <% procesos.forEach(proceso => { %>
+                        <tr>
+                            <td><%= proceso.nombre %></td>
+                            <td><%= proceso.estacion %></td>
+                            <td>
+                                <button class="editar-btn" 
+                                    data-id="<%= proceso.id %>" 
+                                    data-nombre="<%= proceso.nombre %>" 
+                                    data-estacion="<%= proceso.estacion %>">
+                                    Editar
+                                </button>
+                                <% if (proceso.estado === 1) { %>
+                                    <a href="/desactivarProceso/<%= proceso.id %>" 
+                                       class="desactivar-btn" 
+                                       onclick="return confirm('¿Estás seguro de desactivar este proceso?');">
+                                       Desactivar
+                                    </a>
+                                <% } else { %>
+                                    <a href="/activarProceso/<%= proceso.id %>" 
+                                       class="activar-btn" 
+                                       onclick="return confirm('¿Estás seguro de activar este proceso?');">
+                                       Activar
+                                    </a>
+                                <% } %>
+                            </td>
+                            
+                            
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3">No hay procesos registrados.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MODAL PARA EDITAR PROCESO -->
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <span class="cerrar">&times;</span>
+            <h2>Editar Proceso</h2>
+            <form id="formEditar" action="/actualizarProceso" method="POST">
+                <input type="hidden" name="id" id="edit-id">
+                <label for="edit-nombre">Nombre del Proceso:</label>
+                <input type="text" name="nombre" id="edit-nombre" required>
+
+                <label for="edit-estacion">Estación Encargada:</label>
+                <input type="text" name="estacion" id="edit-estacion" required>
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("modalEditar");
+            const cerrarModal = document.querySelector(".cerrar");
+            const formEditar = document.getElementById("formEditar");
+
+            document.body.addEventListener("click", (event) => {
+                if (event.target.classList.contains("editar-btn")) {
+                    abrirModal(event.target);
+                }
+            });
+
+            cerrarModal.addEventListener("click", (event) => {
+                event.preventDefault();
+                cerrarModalEditar();
+            });
+
+            window.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    cerrarModalEditar();
+                }
+            });
+
+            formEditar.addEventListener("submit", (event) => {
+                if (!validarFormulario()) {
+                    event.preventDefault();
+                    alert("Todos los campos son obligatorios.");
+                }
+            });
+
+            function abrirModal(btn) {
+                document.getElementById("edit-id").value = btn.dataset.id;
+                document.getElementById("edit-nombre").value = btn.dataset.nombre;
+                document.getElementById("edit-estacion").value = btn.dataset.estacion;
+                modal.style.display = "block";
+            }
+
+            function cerrarModalEditar() {
+                modal.style.display = "none";
+            }
+
+            function validarFormulario() {
+                const nombre = document.getElementById("edit-nombre").value.trim();
+                const estacion = document.getElementById("edit-estacion").value.trim();
+                return nombre !== "" && estacion !== "";
+            }
+        });
+    </script>
+</body>
+</html>

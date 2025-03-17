@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/icon.png" type="image/x-icon">
+        <link rel="stylesheet" href="styles/agregarProceso.css">
+        <title>AGREGAR PROCESO</title>
+    </head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul>
+                <li><a href="/home">Regresar</a></li>
+                <li><a href="/proceso_list">Ver listado</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="contenedor-formulario">
+        <h2>Agregar Proceso</h2>
+        <form action="/Agregarproceso" method="post">
+            <div class="form-group">
+                <label for="nombre">Ingresa el nombre del proceso:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del proceso">
+            </div>
+            <div class="form-group">
+                <label for="encargado">¿Qué estación se va a encargar?</label>
+                <input type="number" name="encargado" id="encargado" placeholder="Número de estación">
+            </div>
+            <input type="submit" value="Agregar">
+        </form>
+    </div>
+</body>
+</html>

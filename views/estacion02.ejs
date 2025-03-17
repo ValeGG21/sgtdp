@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/estacion02.css">
+    <title>COCCIÓN & ENFRIAMIENTO</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/CRD.png" alt="Logo">
+            <ul> 
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Registro de Temperaturas</h1>
+        <form action="/proceso2" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="producto_elaborado">Producto Elaborado:</label>
+                <select id="producto_elaborado" name="producto_elaborado" required>
+                    <option value="">Seleccione un producto</option>
+                    <option value="CHORIZO">CHORIZO</option>
+                    <option value="JAMON">JAMÓN</option>
+                    <option value="TOCINETA">TOCINETA</option>
+                    <option value="MORCILLA">MORCILLA</option>
+                    <option value="SALCHICHON">SALCHICHÓN</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="temp_antes_cocinar">Temperatura antes de cocinar:</label>
+                <input type="number" step="0.01" name="temp_antes_cocinar" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="temp_coccion">Temperatura de cocción:</label>
+                <input type="number" step="0.01" name="temp_coccion" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="temp_despues_choque">Temperatura después del choque térmico:</label>
+                <input type="number" step="0.01" name="temp_despues_choque" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="hora_separacion">Hora de separación:</label>
+                <input type="time" name="hora_separacion" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="temp_separacion">Temperatura de separación:</label>
+                <input type="number" step="0.01" name="temp_separacion" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="observaciones">Observaciones:</label>
+                <textarea name="observaciones" rows="4" maxlength="5000"></textarea>
+            </div>
+
+            <div class="file-controls">
+                <div class="file-upload">
+                    <button type="button" onclick="document.getElementById('evidencia').click();">Seleccionar Archivo</button>
+                    <span id="file-name">No se ha seleccionado ningún archivo</span>
+                </div>
+                <input type="file" id="evidencia" name="evidencia" accept="image/*" style="display: none;" onchange="updateFileName();">
+            </div>
+            <button type="submit" class="btn-estacion2" >FINALIZAR</button>
+        </form>
+    </main>
+    <script>
+        function updateFileName() {
+            var fileInput = document.getElementById('evidencia');
+            var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No se ha seleccionado ningún archivo';
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+    
+</body>
+</html>
